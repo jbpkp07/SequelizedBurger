@@ -1,0 +1,6 @@
+const configPaths = require("./config/configPaths.js");
+
+module.exports = 
+{
+    config: configPaths.configConnectionDetailsPath
+}
