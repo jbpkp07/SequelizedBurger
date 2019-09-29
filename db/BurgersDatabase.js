@@ -11,10 +11,6 @@ class BurgersDatabase extends SequelizeDatabase {
 
         super();
 
-        this.syncConnectionOptions = { force: true };
-
-        this.rawDataOption = { raw: true };
-
         this.registerSeedPromiseFunc(this.seedDatabase);
     }
 
@@ -22,7 +18,12 @@ class BurgersDatabase extends SequelizeDatabase {
 
         return new Promise((resolve, reject) => {
 
-            this.database.connection.sync(this.syncConnectionOptions).then(() => {
+            const options = 
+            {
+                force: true
+            };
+
+            this.database.connection.sync(options).then(() => {  //Overwrite schema and seed data
 
                 const promises = [];
 
@@ -61,7 +62,8 @@ class BurgersDatabase extends SequelizeDatabase {
 
         return new Promise((resolve, reject) => {
 
-            const options = {
+            const options = 
+            {
                 raw: true,
                 include: [this.database.Burgers, this.database.Ingredients],
                 order: [["fk_burger_id"], ["fk_ingredient_id"]]
@@ -105,7 +107,12 @@ class BurgersDatabase extends SequelizeDatabase {
 
     getAllIngredients() {
 
-        const promise = this.database.Ingredients.findAll(this.rawDataOption);
+        const options = 
+        {
+            raw: true
+        };
+
+        const promise = this.database.Ingredients.findAll(options);
 
         return promise;
     }
@@ -114,7 +121,8 @@ class BurgersDatabase extends SequelizeDatabase {
 
         return new Promise((resolve, reject) => {
 
-            const newBurgerObj = {
+            const newBurgerObj = 
+            {
                 name,
                 devoured: false
             };
@@ -127,7 +135,8 @@ class BurgersDatabase extends SequelizeDatabase {
 
                 for (const ingredientId of ingredientIDs) {
 
-                    const newBurgerIngredient = {
+                    const newBurgerIngredient = 
+                    {
                         fk_burger_id: newBurgerId,
                         fk_ingredient_id: ingredientId
                     };
@@ -153,22 +162,24 @@ class BurgersDatabase extends SequelizeDatabase {
 
     updateBurger(burgerToUpdate) {
 
-        const updateOptions = {
+        const options = 
+        {
             where: { id: burgerToUpdate.id }
         };
 
-        const promise = this.database.Burgers.update(burgerToUpdate, updateOptions);
+        const promise = this.database.Burgers.update(burgerToUpdate, options);
 
         return promise;
     }
 
     deleteBurger(id) {
 
-        const updateOptions = {
+        const options = 
+        {
             where: { id }
         };
 
-        const promise = this.database.Burgers.destroy(updateOptions);
+        const promise = this.database.Burgers.destroy(options);
 
         return promise;
     }

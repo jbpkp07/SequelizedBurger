@@ -106,7 +106,7 @@ class SequelizeDatabase {
 
     connect() {
 
-        if (process.env.BURGERS_DB_FORCE_SYNC === "true") {
+        if (process.env.BURGERS_DB_FORCE_SYNC_AND_SEED === "true") {
 
             if (typeof this.seedPromiseFunc === "function") {
 
@@ -116,7 +116,7 @@ class SequelizeDatabase {
             }
         }
 
-        const promise = this.database.connection.authenticate();
+        const promise = this.database.connection.sync();  //IF NOT EXIST ADD TABLE's (no forced overwriting, no data seeding)
 
         return promise;
     }
