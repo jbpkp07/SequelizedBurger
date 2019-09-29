@@ -40,17 +40,17 @@ function defineBurgerIngredients(sequelize) {
     BurgerIngredients.associate = (models) => {
 
         const associateOptions1 = {
-            foreignKey: "fk_burger_id"
-            // onDelete: "cascade",
-            // onUpdate: "cascade"
+            foreignKey: "fk_burger_id",
+            onDelete: "cascade",
+            onUpdate: "cascade"
         };
 
         BurgerIngredients.belongsTo(models.Burgers, associateOptions1);
 
         const associateOptions2 = {
-            foreignKey: "fk_ingredient_id"
-            // onDelete: "cascade",
-            // onUpdate: "cascade"
+            foreignKey: "fk_ingredient_id",
+            onDelete: "cascade",
+            onUpdate: "cascade"
         };
 
         BurgerIngredients.belongsTo(models.Ingredients, associateOptions2);

@@ -34,20 +34,20 @@ class Controller {
 
             const burgersPromise = this.burgersDatabase.getAllBurgers();
 
-            burgersPromise.then((Burgers) => {
-                console.log(Burgers);
-                handleBarsOBJ.burgers = Burgers;
+            burgersPromise.then((burgers) => {
+      
+                handleBarsOBJ.burgers = burgers;
             });
 
             const ingredientsPromise = this.burgersDatabase.getAllIngredients();
 
-            ingredientsPromise.then((Ingredients) => {
-                console.log(Ingredients);
-                handleBarsOBJ.ingredients = Ingredients;
+            ingredientsPromise.then((ingredients) => {
+        
+                handleBarsOBJ.ingredients = ingredients;
             });
 
             Promise.all([burgersPromise, ingredientsPromise]).then(() => {
-
+  
                 response.render("index", handleBarsOBJ);
 
             }).catch((error) => {
@@ -92,13 +92,11 @@ class Controller {
 
     putAPIBurgers() {
 
-        this.router.put("/api/burgers/:id", (request, response) => {
+        this.router.put("/api/burgers", (request, response) => {
 
-            const id = request.params.id;
-            const name = request.body.name;
-            const devoured = request.body.devoured;
+            const burgerToUpdate = request.body;
 
-            this.burgersDatabase.updateBurger(id, name, devoured).then(() => {
+            this.burgersDatabase.updateBurger(burgerToUpdate).then(() => {
 
                 response.status(200).end();
 

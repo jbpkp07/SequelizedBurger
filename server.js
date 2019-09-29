@@ -10,7 +10,6 @@ const header = require(configPaths.printHeaderFunctionsPath);
 const BurgersDatabase = require(configPaths.burgersDatabasePath);
 const Controller = require(configPaths.controllerPath);
 
-
 const burgersDatabase = new BurgersDatabase();
 
 const controller = new Controller(burgersDatabase);
@@ -23,7 +22,6 @@ app.use(express.json());
 app.use(controller.router);
 app.engine("handlebars", expressHandlebars({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
 
 burgersDatabase.connect().then(() => {
 

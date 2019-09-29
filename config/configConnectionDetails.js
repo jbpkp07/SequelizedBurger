@@ -9,9 +9,8 @@ module.exports =
         "password": process.env.BURGERS_DB_PASS || "",
         "database": "burgers_db",
         "host": "localhost",
-        "dialect": "mysql"
-        // "logging": false,
-        // "operatorsAliases": false
+        "dialect": "mysql",
+        "logging": false
     },
     "test": {
         "username": process.env.BURGERS_DB_USER || "root",
@@ -20,12 +19,10 @@ module.exports =
         "host": "localhost",
         "dialect": "mysql",
         "logging": false
-        // "operatorsAliases": false
     },
     "production": {
         "use_env_variable": "JAWSDB_URL",
         "dialect": "mysql",
         "logging": false
-         // "operatorsAliases": false
     }
 };

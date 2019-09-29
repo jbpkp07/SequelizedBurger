@@ -96,7 +96,7 @@ class ViewController {
                 data: burger
             };
 
-            $.ajax(`/api/burgers/${burger.id}`, ajaxConfig).then(() => {
+            $.ajax(`/api/burgers`, ajaxConfig).then(() => {
 
                 location.reload();
 

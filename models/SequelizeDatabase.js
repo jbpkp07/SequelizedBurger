@@ -1,5 +1,6 @@
 "use strict";
 
+require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
@@ -20,6 +21,8 @@ class SequelizeDatabase {
         this.connection = null;
 
         this.database = {};
+
+        this.seedPromiseFunc = null;
 
         this.assignConnection();
 
@@ -94,6 +97,28 @@ class SequelizeDatabase {
         this.database.connection = this.connection;
 
         this.database.Sequelize = Sequelize;
+    }
+
+    registerSeedPromiseFunc(seedPromiseFunc) {
+
+        this.seedPromiseFunc = seedPromiseFunc;
+    }
+
+    connect() {
+
+        if (process.env.BURGERS_DB_FORCE_SYNC === "true") {
+
+            if (typeof this.seedPromiseFunc === "function") {
+
+                const promise = this.seedPromiseFunc();
+
+                return promise;
+            }
+        }
+
+        const promise = this.database.connection.authenticate();
+
+        return promise;
     }
 }
 
