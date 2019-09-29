@@ -25,6 +25,6 @@
             fk_ingredient_id INT NOT NULL,
             createdAt        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
-            CONSTRAINT fk_burger_id     FOREIGN KEY (fk_burger_id)     REFERENCES burgers(id),
-            CONSTRAINT fk_ingredient_id FOREIGN KEY (fk_ingredient_id) REFERENCES ingredients(id)
+            CONSTRAINT fk_burger_id     FOREIGN KEY (fk_burger_id)     REFERENCES burgers(id)     ON UPDATE CASCADE ON DELETE CASCADE,
+            CONSTRAINT fk_ingredient_id FOREIGN KEY (fk_ingredient_id) REFERENCES ingredients(id) ON UPDATE CASCADE ON DELETE CASCADE
         );
